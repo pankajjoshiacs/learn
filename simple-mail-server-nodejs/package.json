@@ -4,7 +4,7 @@
   "description": "Simple Mail Server for Node JS",
   "main": "index.js",
   "scripts": {
-    "test": "echo no test is found"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "Pankaj Joshi",
   "license": "ISC",
@@ -14,7 +14,8 @@
     "smtp-protocol": "^2.4.7"
   },
   "devDependencies": {
-    "nodemailer": "^2.4.2",
+    "mocha": "^2.5.3",
+    "nodemailer": "^0.7.1",
     "should": "^9.0.2"
   }
 }

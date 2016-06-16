@@ -1,30 +1,26 @@
-var MailParser = require('mailparser').MailParser;
-var mongoose   = require('mongoose');
-var smtp       = require('smtp-protocol');
-var Email      = require('./email_schema.js');
+var smtp = require('smtp-protocol'),
+    mongoose = require('mongoose');
+    Email = require('./email_schema.js');
 
-var mailparser = new MailParser();
+var MailParser = require('mailparser').MailParser,
+    mailparser = new MailParser();
 
+mailparser.on("end", function(mail_object){
+    console.log(mail_object);
 
-mailparser.on("end", function(obj) {
-  console.log('mail object........', obj);
-  
-  new Email(obj).save(function(err, email) {
-    console.log("Email saved...........", err, email);
-  });
+    new Email(mail_object).save(function(err, email) {
+        console.log("Email saved:", err, email);
+    });
 });
 
-
-var server = smtp.createServer(function(req) {
-  req.on("message", function(stream, ack) {
-    stream.pipe(mailparser);
-    ack.accept();
-  });
+var server = smtp.createServer(function (req) {
+    req.on('message', function (stream, ack) {
+        stream.pipe(mailparser);
+        ack.accept();
+    });
 });
 
-
-mongoose.connect('mongodb://localhost/smtp', {}, function() {
-  server.listen(9025);
-});
-
-
+server.listen(9025);
+/*mongoose.connect('mongodb://localhost/stage-smtp', {}, function() {
+    server.listen(9025);
+});*/

@@ -5,9 +5,10 @@ function sendMail(done) {
     var smtpTransport = nodemailer.createTransport("SMTP", {
         host: "localhost",
         secureConnection: false,
-        port: 9025
+        port: 9025,
+        requireTLS: false
     });
-
+    console.log(smtpTransport);
     // setup e-mail data with unicode symbols
     var mailOptions = {
         from: "Pankaj Joshi √ <pankaj.joshi.jpy@gmail.com>", // sender address
@@ -16,9 +17,11 @@ function sendMail(done) {
         text: "Hello world ✔", // plaintext body
         html: "<b>Hello world ✔</b>" // html body
     };
-
+    console.log(mailOptions);
     // send mail with defined transport object
     smtpTransport.sendMail(mailOptions, function(error, response){
+        console.log('Error........', error);
+        console.log('Response.....', response);
         if(error){
             console.log(error);
         }else{
