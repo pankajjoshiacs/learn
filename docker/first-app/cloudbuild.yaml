@@ -3,8 +3,10 @@ steps:
     args:
       - echo
       - hello world
-  - name: bash
+  - name: gcr.io/cloud-builders/gcloud
     args:
-      - cd
-      - '/workspace/docker/first-app/'
+      - builds
+      - submit
+      - 'gcr.io/epam-pankajjo/first-app'
+      - '.'
 
