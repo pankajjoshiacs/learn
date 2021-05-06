@@ -1,0 +1,10 @@
+steps:
+  - name: ubuntu
+    args:
+      - echo
+      - hello world
+  - name: bash
+    args:
+      - cd
+      - '/workspace/docker/first-app/'
+
