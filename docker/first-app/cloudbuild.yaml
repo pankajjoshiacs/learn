@@ -7,6 +7,6 @@ steps:
     args:
       - builds
       - submit
-      - 'gcr.io/epam-pankajjo/first-app'
+      - '--tag=gcr.io/epam-pankajjo/first-app'
       - '.'
 
